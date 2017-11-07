@@ -12,7 +12,7 @@ class GoDaddyServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/laravel-godaddy.php' => $this->app->configPath().'/'.'laravel-godaddy.php',
+            __DIR__ . '/../config/laravel-godaddy.php' => $this->app->configPath() . '/' . 'laravel-godaddy.php',
         ], 'config');
     }
 
@@ -21,17 +21,20 @@ class GoDaddyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/laravel-godaddy.php', 'laravel-godaddy');
+        $this->mergeConfigFrom(__DIR__ . '/../config/laravel-godaddy.php', 'laravel-godaddy');
 
-        $this->app->singleton('laravel-godaddy', function () {
-            return new GoDaddy();
+        $this->app->bind('laravel-godaddy', function () {
+            return new GoDaddy([
+                'key'    => config('laravel-godaddy.key'),
+                'secret' => config('laravel-godaddy.secret'),
+            ]);
         });
     }
 
     /**
      * Get the services provided by the provider.
      */
-    public function provides() : array
+    public function provides(): array
     {
         return ['laravel-godaddy'];
     }

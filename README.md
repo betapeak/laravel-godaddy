@@ -1,5 +1,13 @@
-Provides an easy to use way to communicate with GoDaddy's API in the context of
-a Laravel application.
+# Laravel GoDaddy
+#### Easy and simple GoDaddy API service for your Laravel project
+
+```
+$availability = GoDaddy::available('my-dream-website.com');
+
+if($availability->getAvailable() === true){
+    GoDaddy::purchase('my-dream-website.com');
+}
+```
 
 ### Installation
 
@@ -38,8 +46,11 @@ Finally, you need to publish the config file:
 php artisan vendor:publish --provider="BetaPeak\GoDaddy\GoDaddyServiceProvider"
 ```
 
-**You need to enter your key and secret (which can be generated [here](https://developer.godaddy.com/keys/)) 
-inside the config file you just published. It is located at /config/laravel-godaddy.php.**
+and you must enter your key and secret which can be generated from [GoDaddy's website](https://developer.godaddy.com/keys/).
+The config file is located at /config/laravel-godaddy.php.
+
+If you are planning to use the package to *purchase* domains, make sure you change
+your company details inside the config file as well.
 
 ### Example usage
 
@@ -57,59 +68,22 @@ inside the config file you just published. It is located at /config/laravel-goda
 
 #### Purchasing a domain
 ```
-$domain 			= 'test-domain.com';
-$domainPeriod 		= 1;
-$domainAutoRenew	= false;
-$domainTLD 			= 'pl';
-$contact 			= [
-	'name'			=> 'John',
-	'surname'		=> 'Doe',
-	'email'			=> 'john.doe@test-domain.com',
-	'phone'			=> '+48.111111111',
-	'organization'	=> 'Corporation Inc.',
-	'street'		=> 'Street Ave. 666',
-	'city'			=> 'New City',
-	'country'		=> 'PL',
-	'postal-code'	=> '11-111',
-	'state'			=> 'state of art'
-];
+GoDaddy::purchase('example.com' );
+```
 
-$agreement = GoDaddy::getAgreement($domainTLD, false);
-$agreementKeys = [$agreement[0]->getAgreementKey()];
+#### Purchasing a domain for two years
+```
+GoDaddy::purchase('example.com', 2);
+```
 
-$domainPurchase = new \GoDaddyDomainsClient\Model\DomainPurchase();
-$domainPurchase->setDomain($domain);
+#### Purchasing a domain with automatic renewal (defaults to false)
+```
+GoDaddy::purchase('example.com', 1, true);
+```
 
-$domainPurchaseConsent = new \GoDaddyDomainsClient\Model\Consent();
-$domainPurchaseConsent->setAgreementKeys($agreementKeys);
-$domainPurchaseConsent->setAgreedBy($contact['name'] . ' ' . $contact['surname']);
-$domainPurchaseConsent->setAgreedAt(date("Y-m-d\TH:i:s\Z"));
-$domainPurchase->setConsent($domainPurchaseConsent); 
-
-$domainContactAdmin = new \GoDaddyDomainsClient\Model\Contact();
-$domainContactAdmin->setNameFirst($contact['name']);
-$domainContactAdmin->setNameLast($contact['surname']);
-$domainContactAdmin->setEmail($contact['email']);
-$domainContactAdmin->setPhone($contact['phone']);
-$domainContactAdmin->setOrganization($contact['organization']);
-
-$domainContactAdminAddressMailing = new \GoDaddyDomainsClient\Model\Address();
-$domainContactAdminAddressMailing->setAddress1($contact['street']);
-$domainContactAdminAddressMailing->setCity($contact['city']);
-$domainContactAdminAddressMailing->setCountry($contact['country']);
-$domainContactAdminAddressMailing->setPostalCode($contact['postal-code']);
-$domainContactAdminAddressMailing->setState($contact['state']);
-
-$domainContactAdmin->setAddressMailing($domainContactAdminAddressMailing);
-
-$domainPurchase->setContactAdmin($domainContactAdmin);
-$domainPurchase->setContactBilling($domainContactAdmin);
-$domainPurchase->setContactRegistrant($domainContactAdmin);
-$domainPurchase->setContactTech($domainContactAdmin);
-$domainPurchase->setPeriod($domainPeriod);
-$domainPurchase->setRenewAuto($domainAutoRenew);
-
-$result = GoDaddy::purchase($domainPurchase);
+#### Purchasing a domain as a reseller
+```
+GoDaddy::purchase('example.com', 1, false, 'some-x-seller-id');
 ```
 
 ### Full docs
