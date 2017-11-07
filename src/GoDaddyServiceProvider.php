@@ -4,7 +4,7 @@ namespace BetaPeak\GoDaddy;
 
 use Illuminate\Support\ServiceProvider;
 
-class GlideServiceProvider extends ServiceProvider
+class GoDaddyServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application events.
