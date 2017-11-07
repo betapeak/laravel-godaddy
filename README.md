@@ -84,7 +84,7 @@ $domainPurchaseConsent = new \GoDaddyDomainsClient\Model\Consent();
 $domainPurchaseConsent->setAgreementKeys($agreementKeys);
 $domainPurchaseConsent->setAgreedBy($contact['name'] . ' ' . $contact['surname']);
 $domainPurchaseConsent->setAgreedAt(date("Y-m-d\TH:i:s\Z"));
-$domainPurchase->setConsent($domainPurchaseConsent);
+$domainPurchase->setConsent($domainPurchaseConsent); 
 
 $domainContactAdmin = new \GoDaddyDomainsClient\Model\Contact();
 $domainContactAdmin->setNameFirst($contact['name']);
