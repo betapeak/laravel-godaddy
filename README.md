@@ -1,3 +1,7 @@
+[![Latest Stable Version](https://poser.pugx.org/betapeak/laravel-godaddy/v/stable)](https://packagist.org/packages/betapeak/laravel-godaddy)
+[![License](https://poser.pugx.org/betapeak/laravel-godaddy/license)](https://packagist.org/packages/betapeak/laravel-godaddy)
+[![Total Downloads](https://poser.pugx.org/betapeak/laravel-godaddy/downloads)](https://packagist.org/packages/betapeak/laravel-godaddy)
+
 # Laravel GoDaddy
 #### Easy and simple GoDaddy API service for your Laravel project
 
