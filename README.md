@@ -53,8 +53,15 @@ php artisan vendor:publish --provider="BetaPeak\GoDaddy\GoDaddyServiceProvider"
 and you must enter your key and secret which can be generated from [GoDaddy's website](https://developer.godaddy.com/keys/).
 The config file is located at /config/laravel-godaddy.php.
 
-If you are planning to use the package to *purchase* domains, make sure you change
-your company details inside the config file as well.
+NOTE: If you are testing the purchasing functionality, you need to use GoDaddy's predefined
+API keys, as those generated from the developer's site will not work:
+```
+"key"    => "UzQxLikm_46KxDFnbjN7cQjmw6wocia",
+"secret" => "46L26ydpkwMaKZV6uVdDWe"
+```
+
+NOTE 2: If you are planning to use the package to *purchase* domains in production, make sure you change
+your company details inside the config file as well. You need to generate production API keys from [the reseller website](https://reseller.godaddy.com/).
 
 ### Example usage
 
