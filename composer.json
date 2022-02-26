@@ -21,7 +21,7 @@
   ],
   "require": {
     "php": ">=7.0",
-    "gellu/godaddy-api-client": "^1.1.1"
+    "gellu/godaddy-api-client": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "5.*",
