@@ -1,6 +1,6 @@
 {
   "name": "betapeak/laravel-godaddy",
-  "description": "An easy way to search for and purchase domains from GoDaddy.com",
+  "description": "An easy way to search for and purchase domains from GoDaddy.com (modified by Vijay Goswami)",
   "homepage": "https://github.com/betapeak/laravel-godaddy",
   "keywords": [
     "laravel",
